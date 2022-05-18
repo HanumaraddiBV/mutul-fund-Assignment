@@ -9,7 +9,7 @@ export const MutulFundList = () => {
 
   const getDataList = () => {
     axios
-      .get("https://mutul-fund-data.herokuapp.com/datas/last_7days")
+      .get("https://mutul-funds-data.herokuapp.com/latests/latest_return")
       .then((list) => {
         setData(list.data);
       });
@@ -24,17 +24,19 @@ export const MutulFundList = () => {
               <th>Scheme Name</th>
               <th>ISIN Div Payout/ISIN Growth</th>
               <th>Net Asset Value</th>
-              <th>Date</th>
+              <th>7 days return</th>
+             
             </tr>
           </thead>
           <tbody>
             {data.map((ele) => (
-              <tr>
+              <tr key={ele.code}>
                 <td>{ele.code}</td>
                 <td>{ele.name}</td>
                 <td>{ele.ISIN}</td>
                 <td>{ele.netAssetValue}</td>
-                <td>{ele.date}</td>
+                <td>{ele.latest_return}</td>
+                
               </tr>
             ))}
           </tbody>

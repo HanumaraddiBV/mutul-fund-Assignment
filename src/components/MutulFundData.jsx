@@ -7,15 +7,18 @@ export const MutulFundData = () => {
 
   useEffect(() => {
     getData();
+  
   }, []);
 
   const getData = () => {
     axios
-      .get("https://mutul-fund-data.herokuapp.com/datas/top_ten")
+      .get("https://mutul-funds-data.herokuapp.com/latests/funds")
       .then((list) => {
         setTopTenList(list.data);
       });
   };
+ 
+  
   return (
     <>
       <div>
@@ -26,17 +29,17 @@ export const MutulFundData = () => {
               <th>Scheme Name</th>
               <th>ISIN Div Payout/ISIN Growth</th>
               <th>Net Asset Value</th>
-              <th>Date</th>
+              <th>standard deviation</th>
             </tr>
           </thead>
           <tbody>
             {topTenList.map((ele) => (
-              <tr>
+              <tr key={ele.code}>
                 <td>{ele.code}</td>
                 <td>{ele.name}</td>
                 <td>{ele.ISIN}</td>
                 <td>{ele.netAssetValue}</td>
-                <td>{ele.date}</td>
+                <td>{ele.standardDiv}</td>
               </tr>
             ))}
           </tbody>
